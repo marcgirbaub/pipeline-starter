@@ -54,3 +54,9 @@ jobs:
           context: ./back-end-app # El working directory
           push: true
           tags: ghcr.io/${{ github.actor }}/ci-cd-example-back:latest # Añadimos el tag de la imagen apuntando al registry de Github
+      - name: Deploy to Render
+        id: render_deploy
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
